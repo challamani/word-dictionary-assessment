@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/happiest-minds-assessment/1.0.0")
@@ -54,21 +55,21 @@ public class SearchController {
 
 
     @GetMapping("/searchByCommaSeparateWords/{commaSeparateWords}")
-    public ResponseEntity<List<Word>> searchByCommaSeparateWords(@PathVariable String commaSeparateWords) {
+    public ResponseEntity<List<String>> searchByCommaSeparateWords(@PathVariable String commaSeparateWords) {
 
         List<Word> words = dictionaryDomainService.fetchWordsBySearchString(commaSeparateWords);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(words);
+                .body(words.stream().map(o -> o.getWord()).collect(Collectors.toList()));
     }
 
 
     @GetMapping("/searchBySubWord/{word}")
-    public ResponseEntity<List<Word>> searchBySubWord(@PathVariable String word) {
+    public ResponseEntity<List<String>> searchBySubWord(@PathVariable String word) {
 
         List<Word> words = dictionaryDomainService.searchByPregMatch(word);
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(words);
+                .body(words.stream().map(o -> o.getWord()).collect(Collectors.toList()));
     }
 }
