@@ -1,6 +1,7 @@
-####Spring boot application
+<h3>Spring boot application</h3>
 
-#####API to create and persist a word dictionary by uploading a text file having few paragraphs and keeps the words in h2 database (dictionary)
+
+**API to create and persist a word dictionary by uploading a text file having few paragraphs and keeps the words in h2 database (dictionary)**
 **This spring boot application contains 5 APIs**
 
 **[POST API] There are two post apis, we can invoke by using simple ajax-base UI (http://localhost:8080)** 
